@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Mr_Valvetro.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Intro.gd" type="Script" id=2]
+[ext_resource path="res://black.png" type="Texture" id=3]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Black" type="Sprite" parent="."]
+position = Vector2( 529.5, 309 )
+scale = Vector2( 6.22414, 2.22759 )
+texture = ExtResource( 3 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 924.0
+margin_bottom = 540.0
+stream = ExtResource( 1 )
+autoplay = true

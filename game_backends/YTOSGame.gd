@@ -13,6 +13,9 @@ var current_processes = []
 
 var external_connections = {}
 
+var green_prc = 0
+var orange_prc = 0
+
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready():
@@ -193,5 +196,18 @@ func parse_command(command, player, server):
             server.play_sound("port_shift")
         else:
             server.send_terminal_message(player.game_terminal_id, "Insufficient intel to shift ports (<"+str(intel_cost)+")")
+    elif command.begins_with("process_greened|"):
+        if command.split('|') == "green":
+            green_prc += 1
+            if green_prc == 10:
+                green_prc = 0
+                server.green_score += 1
+                server.GREEN_SCORE_LABEL.text = str(server.green_score)
+        elif command.split('|') == "orange":
+            orange_prc += 1
+            if orange_prc == 10:
+                orange_prc = 0
+                server.orange_score += 1
+                server.ORANGE_SCORE_LABEL.text = str(server.orange_score)
     else:
         server.send_terminal_message(player.game_terminal_id, "INVALID TELNET COMMAND")
